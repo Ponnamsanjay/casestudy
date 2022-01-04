@@ -1,0 +1,15 @@
+1)SELECT worker_id,first_name,last_name,salary as 'having_same_salary'
+  FROM worker_details
+  WHERE Salary IN (
+    SELECT Salary
+    FROM worker_details
+    GROUP BY salary
+    HAVING COUNT(*) > 1) order by salary ;
+
+
+2)SELECT distinct worker_id, first_name,last_name,department, Salary
+  FROM worker_details
+  WHERE Salary in
+   (SELECT max(Salary) AS salary
+    From worker_details
+    GROUP BY department);
